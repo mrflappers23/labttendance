@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 import {
@@ -100,7 +101,6 @@ function AccessPending() {
     student: "/student"
   };
 
-  // Still checking the account.
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -111,32 +111,23 @@ function AccessPending() {
     );
   }
 
-  // User is not authenticated.
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  // Profile successfully loaded.
   if (profile) {
     const destination = destinations[profile.role];
 
     if (destination) {
-      return (
-        <Navigate
-          to={destination}
-          replace
-        />
-      );
+      return <Navigate to={destination} replace />;
     }
 
     return <Navigate to="/no-access" replace />;
   }
 
-  // No profile found after loading.
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
       <div className="max-w-md text-center">
-
         <h1 className="text-xl font-bold">
           Account setup required
         </h1>
@@ -158,7 +149,6 @@ function AccessPending() {
         >
           Sign Out
         </button>
-
       </div>
     </div>
   );
@@ -196,6 +186,7 @@ export default function App() {
   const nameOf = (id) =>
     students.find((s) => s.id === id)?.name ?? "Unknown";
 
+  // Admin presses "Time out" on a live session.
   const timeOut = (recordId) =>
     setRecords((rs) =>
       rs.map((r) =>
@@ -205,6 +196,8 @@ export default function App() {
       )
     );
 
+  // A QR scan: scanning the current lab times out;
+  // scanning another lab times the student in.
   const scan = (studentId, lab) => {
     const now = Date.now();
 
@@ -297,40 +290,13 @@ export default function App() {
             </RequireAuth>
           }
         >
-          <Route
-            path="dashboard"
-            element={<Dashboard />}
-          />
-
-          <Route
-            path="students"
-            element={<Students />}
-          />
-
-          <Route
-            path="live"
-            element={<LiveAttendance />}
-          />
-
-          <Route
-            path="qr"
-            element={<QrAttendance />}
-          />
-
-          <Route
-            path="records"
-            element={<Records />}
-          />
-
-          <Route
-            path="reports"
-            element={<Reports />}
-          />
-
-          <Route
-            path="settings"
-            element={<SettingsPage />}
-          />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="students" element={<Students />} />
+          <Route path="live" element={<LiveAttendance />} />
+          <Route path="qr" element={<QrAttendance />} />
+          <Route path="records" element={<Records />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
 
         <Route path="*" element={<HomeRedirect />} />
