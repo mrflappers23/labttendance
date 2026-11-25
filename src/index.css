@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #1a8550;
+  --color-brand-dark: #0f5c37;
+  --color-brand-light: #cdf7e1;
+  --color-brand-soft: #e8faf1;
+  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
